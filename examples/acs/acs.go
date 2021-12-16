@@ -9,7 +9,7 @@
 package main
 
 import (
-	gc "github.com/rthornton128/goncurses"
+	gc "github.com/vit1251/goncurses"
 	"log"
 )
 

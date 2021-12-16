@@ -4,6 +4,8 @@
 #ifndef _GONCURSES_
 #define _GONCURSES_ 1
 
+void ncurses_init();
+
 #ifdef PDCURSES
 bool is_term_resized(int y, int x);
 int resizeterm(int y, int x);

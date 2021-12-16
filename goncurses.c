@@ -5,6 +5,17 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <curses.h>
+#include <locale.h>
+
+#ifdef PDCURSES
+void ncurses_init() {
+}
+#else
+void ncurses_init() {
+	fprintf(stderr, "SetLocale(!)");
+	setlocale(LC_ALL, "");
+}
+#endif
 
 #ifdef PDCURSES
 bool is_term_resized(int y, int x) { return is_termresized(); }
