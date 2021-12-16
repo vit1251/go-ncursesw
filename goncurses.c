@@ -4,7 +4,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include <curses.h>
+#include <ncurses.h>
 #include <locale.h>
 
 void ncurses_init() {
@@ -102,4 +102,9 @@ bool goncurses_set_escdelay(int size) {
   ESCDELAY = size;
   return true;
 #endif
+}
+
+void ncurses_waddstr(WINDOW *win, const char *str) {
+	fprintf(stderr, "debug: str = '%s'\n", str);
+	waddstr(win, str);
 }

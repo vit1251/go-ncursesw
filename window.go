@@ -5,7 +5,7 @@
 package goncurses
 
 // #include <stdlib.h>
-// #include <curses.h>
+// #include <ncurses.h>
 // #include "goncurses.h"
 import "C"
 
@@ -28,8 +28,7 @@ func NewWindow(h, w, y, x int) (window *Window, err error) {
 	return
 }
 
-// AddChar prints a single character to the window. The character can be
-// OR'd together with attributes and colors.
+// AddChar prints a single character to the window.
 func (w *Window) AddChar(ach Char) {
 	C.waddch(w.win, C.chtype(ach))
 }
@@ -373,22 +372,18 @@ func (w *Window) Parent() *Window {
 	return &Window{p}
 }
 
-// Print a string to the given window. See the fmt package in the standard
-// library for more information. In order to simulate the 'n' version
-// of functions (like addnstr) just slice your string to the maximum
-// length before passing it as an argument.
-// window.Print("My line which should be clamped to 20 characters"[:20])
-func (w *Window) Print(args ...interface{}) {
-	w.Printf("%s", fmt.Sprint(args...))
+// Print a string to the given window.
+func (w *Window) Print(str string) {
+	cstr := C.CString(str)
+	defer C.free(unsafe.Pointer(cstr))
+	C.ncurses_waddstr(w.win, cstr)
 }
 
 // Printf functions the same as the standard library's fmt package. See Print
 // for more details.
 func (w *Window) Printf(format string, args ...interface{}) {
-	cstr := C.CString(fmt.Sprintf(format, args...))
-	defer C.free(unsafe.Pointer(cstr))
-
-	C.waddstr(w.win, cstr)
+	str := fmt.Sprintf(format, args...)
+	w.Print(str)
 }
 
 // Println behaves the same as the standard library's fmt package.

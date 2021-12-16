@@ -4,6 +4,7 @@ import (
 	"github.com/vit1251/goncurses"
 	"log"
 	"time"
+	"fmt"
 )
 
 func main() {
@@ -20,11 +21,13 @@ func main() {
 	}
 
 	/* Box Drawing unicode example */
-	stdscr.Print("┌─ Title ──────────────────────┐")
-	stdscr.Print("│                              │")
-	stdscr.Print("└──────────────────────────────┘")
+	stdscr.Printf("FMT_HORIZ = '─'\n")
+	stdscr.Printf("FMT_VERT = '│'\n")
 	stdscr.Refresh()
 
-	time.Sleep(1 * time.Minute)
+	time.Sleep(500 * time.Millisecond)
+
+	fmt.Printf("FMT_HORIZ = '─'\n")
+	fmt.Printf("FMT_VERT = '│'\n")
 
 }

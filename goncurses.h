@@ -33,5 +33,6 @@ WINDOW * ncurses_wgetparent(const WINDOW *win);
 int ncurses_wstandend(WINDOW *win);
 int ncurses_wstandout(WINDOW *win);
 bool goncurses_set_escdelay(int size);
+void ncurses_waddstr(WINDOW *win, const char *str);
 
 #endif /* _GONCURSES_ */

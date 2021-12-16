@@ -4,8 +4,8 @@
 
 package goncurses
 
-// #cgo !darwin,!openbsd,!windows pkg-config: ncurses
-// #include <curses.h>
+// #cgo !darwin,!openbsd,!windows pkg-config: ncursesw
+// #include <ncurses.h>
 import "C"
 
 // Synconize options for Sync() function
