@@ -376,7 +376,7 @@ func (w *Window) Parent() *Window {
 func (w *Window) Print(str string) {
 	cstr := C.CString(str)
 	defer C.free(unsafe.Pointer(cstr))
-	C.ncurses_waddstr(w.win, cstr)
+	C.waddstr(w.win, cstr)
 }
 
 // Printf functions the same as the standard library's fmt package. See Print
