@@ -7,6 +7,7 @@
 #include <ncurses.h>
 #include <locale.h>
 
+// See more about initialize unicode on https://linux.die.net/man/3/ncurses
 void ncurses_init() {
 	setlocale(LC_ALL, "");
 }

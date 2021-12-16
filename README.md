@@ -1,37 +1,46 @@
 # Overview
-Goncurses is an ncurses library for the Go programming language. It
+
+Goncurses is an unicode ncurses library for the Go programming language. It
 requires both pkg-config and ncurses C development files be installed.
 
 # Installation
+
 The go tool is the recommended method of installing goncurses. Issue the
 following command on the command line:
 
-$ go get github.com/rthornton128/goncurses
+    $ go get github.com/vit1251/goncurses
 
-OSX and Windows users should visit the 
-[Wiki](https://github.com/rthornton128/goncurses/wiki) for installation
-instructions.
+## Linux compile errors
 
-## Pkg-config Flags Error
-**Cgo** will fail to build with an invalid or unknown flag error with recent
-versions of **ncurses**. Unfortunately, the **cgo** tool only provides one
-mechanism for overcoming this. You need to set \*\_ALLOW environment variables
-to overcome the issue. There are no **cgo** directives or any other clever
-ways (that I know of) to fix this.
+Since native nature of `ncurses` no problem is register.
 
-This package provides a [Makefile](../master/Makefile) as one solution.
-Another would be to set the variables in your shell in whatever way makes
-you feel comfortable.
+## OSX compile errors
 
-See Issues: [#55](https://github.com/rthornton128/goncurses/issues/55) and
-[#56](https://github.com/rthornton128/goncurses/issues/56)
+Most OSX version provide outdate curses C library version 5.3 and `goncurses`
+unable operate with that outdate version.
 
-# Notes
+You may use `brew` system to update your ncurses (recomended version >= 6.3).
 
-No functions which operate only on stdscr have been implemented because 
-it makes little sense to do so in a Go implementation. Stdscr is treated the
-same as any other window.
+    $ brew install ncurses
 
-Whenever possible, versions of ncurses functions which could potentially
-have a buffer overflow, like the getstr() family of functions, have not been
-implemented. Instead, only mvwgetnstr() and wgetnstr() are used.
+And setup you `pkg-config` directory as shown after:
+
+    $ export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
+
+## Microsoft Windows compile errors
+
+Since Microsoft Windows actually does not support POSIX subsystem and
+terminal subsystem, use a C library such as `ncurses` does not make sence.
+
+You can use more suitable WinAPI terminal library instead.
+
+Initially, the author tried to add support for `pdncurses`, but this issue
+needs to be resolved by higher-level libraries outside of support for the
+`ncurses` library name.
+
+Support for the Microsft Windows system has been removed and in the future
+the library will issue an explicit build error on this platform.
+
+## FreeBSD compile errors
+
+No checks.

@@ -1,4 +1,4 @@
-goncurses - ncurses library for Go.
+goncurses - unicode ncurses library for Go.
 
 Copyright (c) 2011, Rob Thornton 
 
